@@ -1,0 +1,15 @@
+{
+  "name": "vue-ssr-kotlin",
+  "version": "1.0.0",
+  "description": "java ssr with vuejs written in kotlin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nikos Fytros",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^3.1.0",
+    "vue": "^2.4.2"
+  }
+}
