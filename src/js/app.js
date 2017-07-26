@@ -1,15 +1,17 @@
-const uuidv4 = require('uuid/v4');
-const http = require('http');
+// Step 1: Create a Vue instance
+const Vue = require('vue')
+const app = new Vue({
+    template: `<div>Hello World</div>`
+})
 
-const server = http.createServer(function (request, response) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.end(someKotlinMethod(logUUID()));
-});
+// Step 2: Create a renderer
+const renderer = require('vue-server-renderer').createRenderer()
 
-function logUUID() {
-    return uuidv4();
-}
-
-server.listen(8000);
-
-console.log('Server running at http://127.0.0.1:8000/');
+// Step 3: Render the Vue instance to HTML
+renderer.renderToString(app, (err, html) => {
+    if (err) {
+        renderCallback(err)
+    } else {
+        renderCallback(html)
+    }
+})
