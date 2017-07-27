@@ -7,10 +7,13 @@ import com.eclipsesource.v8.V8
 
 class Renderer(laygoutFilePath: String?, componentsFolderPath: String?) {
     val runtime = V8.createV8Runtime()
-    val nodeJS = NodeJS.createNodeJS()
+    val nodeJS: NodeJS = NodeJS.createNodeJS()
 
     fun render(viewFilePath: String?) {
-        val callback = JavaCallback { receiver, parameters -> print(parameters.get(0)) }
+
+        val callback = JavaCallback { receiver, parameters ->
+            println(parameters.get(0))
+        }
 
         nodeJS.runtime.registerJavaMethod(callback, "renderCallback")
         nodeJS.exec(JavascriptFile("app.js").jsFile)

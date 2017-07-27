@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 group 'vue-ssr-kotlin'
 version '1.0-SNAPSHOT'
 
@@ -20,14 +22,25 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    // linux source
-    // compile group: 'com.eclipsesource.j2v8', name: 'j2v8_linux_x86_64', version: '4.8.0'
-    compile group: 'com.eclipsesource.j2v8', name: 'j2v8_win32_x86_64', version: '4.6.0'
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        compile group: 'com.eclipsesource.j2v8', name: 'j2v8_win32_x86_64', version: '4.6.0'
+    } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+        compile group: 'com.eclipsesource.j2v8', name: 'j2v8_linux_x86_64', version: '4.8.0'
+    } else if (Os.isFamily(Os.FAMILY_MAC)) {
+        compile group: 'com.eclipsesource.j2v8', name: 'j2v8_macosx_x86_64', version: '4.8.0'
+    }
 }
 
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+task checkWin() << {
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        println "*** WINDOWS "
+    }
 }
