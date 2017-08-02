@@ -2,6 +2,13 @@ import com.eclipsesource.v8.NodeJS
 import com.eclipsesource.v8.JavaCallback
 import utils.JavascriptFile
 import com.eclipsesource.v8.V8
+import kotlinx.coroutines.experimental.runBlocking
+import org.jetbrains.ktor.netty.*
+import org.jetbrains.ktor.routing.*
+import org.jetbrains.ktor.application.*
+import org.jetbrains.ktor.host.*
+import org.jetbrains.ktor.http.*
+import org.jetbrains.ktor.response.*
 
 
 
@@ -9,10 +16,12 @@ class Renderer(laygoutFilePath: String?, componentsFolderPath: String?) {
     val runtime = V8.createV8Runtime()
     val nodeJS: NodeJS = NodeJS.createNodeJS()
 
-    fun render(viewFilePath: String?) {
+    fun render(call: ApplicationCall, viewFilePath: String?) {
 
         val renderCallback = JavaCallback { receiver, parameters ->
-            print(parameters.get(0))
+            runBlocking {
+                call.respondText(parameters.get(0).toString(), ContentType.Text.Html)
+            }
             /* required to return null as Kotlin's default is Unit and js crashes */
             null
         }
@@ -27,5 +36,11 @@ class Renderer(laygoutFilePath: String?, componentsFolderPath: String?) {
 }
 
 fun main(args: Array<String>) {
-    Renderer(null, null).render(null)
+    embeddedServer(Netty, 8080) {
+        routing {
+            get("/") {
+                Renderer(null, null).render(call, null)
+            }
+        }
+    }.start(wait = true)
 }
