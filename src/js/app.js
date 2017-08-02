@@ -2,6 +2,7 @@
 const Vue = require('vue');
 const ExpressVueRenderer = require('express-vue-renderer');
 const path = require('path');
+const uuidv4 = require('uuid/v4');
 
 // options object
 const options = {
@@ -9,9 +10,8 @@ const options = {
     viewsPath: path.join(__dirname, 'vue'),
     componentsPath: 'vue/components',
     layout: {
-        start: '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">',
-        middle: '<body><div id="app">',
-        end: '</div></body></html>'
+        start: '<body><div id="app">',
+        end: '</div></body>'
     },
     vue: {
         head: {
@@ -29,7 +29,8 @@ const Renderer = new ExpressVueRenderer(options);
 // data and options object to be passed from the backend
 const data = {
     title: 'Express Vue',
-    message: 'Hello world'
+    message: 'Hello world',
+    uuid: uuidv4()
 };
 const vueOptions = {
     head: {
