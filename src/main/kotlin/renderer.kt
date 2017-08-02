@@ -12,7 +12,9 @@ class Renderer(laygoutFilePath: String?, componentsFolderPath: String?) {
     fun render(viewFilePath: String?) {
 
         val renderCallback = JavaCallback { receiver, parameters ->
-            println(parameters.get(0))
+            print(parameters.get(0))
+            /* required to return null as Kotlin's default is Unit and js crashes */
+            null
         }
 
         nodeJS.runtime.registerJavaMethod(renderCallback, "renderCallback")
