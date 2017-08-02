@@ -11,11 +11,11 @@ class Renderer(laygoutFilePath: String?, componentsFolderPath: String?) {
 
     fun render(viewFilePath: String?) {
 
-        val callback = JavaCallback { receiver, parameters ->
+        val renderCallback = JavaCallback { receiver, parameters ->
             println(parameters.get(0))
         }
 
-        nodeJS.runtime.registerJavaMethod(callback, "renderCallback")
+        nodeJS.runtime.registerJavaMethod(renderCallback, "renderCallback")
         nodeJS.exec(JavascriptFile("app.js").jsFile)
         while (nodeJS.isRunning) {
             nodeJS.handleMessage()
