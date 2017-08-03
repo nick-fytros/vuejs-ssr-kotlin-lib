@@ -40,13 +40,13 @@ const vueOptions = {
 
 var HtmlChunks = '';
 Renderer.renderToStream('main.vue', data, vueOptions)
-    .then(stream => {
-        stream.on('data', chunk => {
+    .then(function(stream) {
+        stream.on('data', function(chunk) {
             HtmlChunks += chunk;
         });
-        stream.on('end', () => {
+        stream.on('end', function() {
             renderCallback(HtmlChunks);
         });
-    }).catch(error => {
+    }).catch(function(error) {
         console.error(error);
     });

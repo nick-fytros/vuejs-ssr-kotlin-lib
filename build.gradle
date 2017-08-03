@@ -18,16 +18,18 @@ buildscript {
 apply plugin: 'kotlin'
 
 repositories {
-    mavenCentral()
+//    mavenCentral()
     jcenter()
-    maven { url "https://dl.bintray.com/kotlin/kotlinx" }
-    maven { url "https://dl.bintray.com/kotlin/ktor" }
+//    maven { url "https://dl.bintray.com/kotlin/kotlinx" }
+//    maven { url "https://dl.bintray.com/kotlin/ktor" }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    compile "org.jetbrains.ktor:ktor-core:$ktor_version"
-    compile "org.jetbrains.ktor:ktor-netty:$ktor_version"
+    compile 'io.vertx:vertx-web:3.4.2'
+    compile group: 'com.coveo', name: 'nashorn-commonjs-modules', version: '1.0.8'
+//    compile "org.jetbrains.ktor:ktor-core:$ktor_version"
+//    compile "org.jetbrains.ktor:ktor-netty:$ktor_version"
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         compile group: 'com.eclipsesource.j2v8', name: 'j2v8_win32_x86_64', version: '4.6.0'
     } else if (Os.isFamily(Os.FAMILY_UNIX)) {

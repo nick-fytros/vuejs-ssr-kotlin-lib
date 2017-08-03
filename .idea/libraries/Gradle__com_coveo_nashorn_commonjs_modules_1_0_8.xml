@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.coveo:nashorn-commonjs-modules:1.0.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.coveo/nashorn-commonjs-modules/1.0.8/ff6828150f00a234a3d275520225ac771cc3e58b/nashorn-commonjs-modules-1.0.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.coveo/nashorn-commonjs-modules/1.0.8/952412c178bc6d31b66a42af9bbe30478fc6d658/nashorn-commonjs-modules-1.0.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
